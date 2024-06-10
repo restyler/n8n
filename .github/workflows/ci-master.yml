@@ -23,6 +23,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Setup build cache
+        uses: dtinth/setup-github-actions-caching-for-turbo@v1.3.0
+
       - name: Build
         run: pnpm build
 
@@ -63,6 +66,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Setup build cache
+        uses: dtinth/setup-github-actions-caching-for-turbo@v1.3.0
 
       - name: Restore cached build artifacts
         uses: actions/cache/restore@v4.0.0
