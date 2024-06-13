@@ -122,7 +122,6 @@ export const registerController = (app: Application, controllerClass: Class<obje
 			const handler = async (req: Request, res: Response) => {
 				// TODO: remove this default args once all routes have been migrated
 				let args: unknown[] = [req, res];
-				const validationErrors = [];
 				if (route.args?.length) {
 					args = [];
 					for (let index = 0; index < route.args.length; index++) {
@@ -135,17 +134,12 @@ export const registerController = (app: Application, controllerClass: Class<obje
 							if (paramType && 'parse' in paramType) {
 								const output = paramType.safeParse(req[arg.type]);
 								if (output.success) args.push(output.data);
-								else validationErrors.push(output.error);
+								else {
+									return res.status(400).json(output.error.errors[0]);
+								}
 							}
 						} else throw new ApplicationError('Unknown arg type: ' + arg.type);
 					}
-				}
-				if (validationErrors.length) {
-					return res.status(400).json({
-						status: 'error',
-						message: 'Validation failed',
-						errors: validationErrors,
-					});
 				}
 				return await controller[handlerName](...args);
 			};

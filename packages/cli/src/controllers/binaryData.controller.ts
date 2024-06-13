@@ -1,20 +1,7 @@
 import { Response } from 'express';
-import { BinaryDataService, FileNotFoundError, BinaryDataStoredModes } from 'n8n-core';
+import { BinaryDataService, FileNotFoundError } from 'n8n-core';
 import { Get, Query, Res, RestController } from '@/decorators';
-import { z } from 'zod';
-import { Z } from 'zod-class';
-
-export class GetBinaryData extends Z.class({
-	id: z
-		.string({
-			required_error: 'Missing binary data ID',
-			invalid_type_error: 'Invalid binary data ID',
-		})
-		.regex(new RegExp(`^(${BinaryDataStoredModes.join('|')}):`)),
-	action: z.literal('view').or(z.literal('download')),
-	fileName: z.string().optional(),
-	mimeType: z.string().optional(),
-}) {}
+import { GetBinaryData } from '@/dtos/binaryData';
 
 @RestController('/binary-data')
 export class BinaryDataController {
