@@ -507,6 +507,9 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.26.0
         version: 9.26.0(eslint@8.57.0)
+      typescript-eslint-parser-for-extra-files:
+        specifier: ^0.7.0
+        version: 0.7.0(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.2))(typescript@5.4.2)(vue@3.4.21(typescript@5.4.2))
       vue-eslint-parser:
         specifier: ^9.4.3
         version: 9.4.3(eslint@8.57.0)
@@ -12982,6 +12985,25 @@ packages:
 
   typedi@0.10.0:
     resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
+
+  typescript-eslint-parser-for-extra-files@0.7.0:
+    resolution: {integrity: sha512-dNjuJCeGHA2yreEzQC8NRrZylgrJKZJ/kpLNusbRqEUAJfwJo2eOALpr2vsxcoqAzDyi72T8FQypSVhAOAaJrw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@typescript-eslint/parser': '>=5.41.0'
+      astrojs-compiler-sync: '>=0.3.1'
+      svelte2tsx: '>=0.7.9'
+      typescript: ^5.4.2
+      vue: ^3.2.45
+    peerDependenciesMeta:
+      astrojs-compiler-sync:
+        optional: true
+      svelte2tsx:
+        optional: true
+      typescript:
+        optional: true
+      vue:
+        optional: true
 
   typescript@5.4.2:
     resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
@@ -28158,6 +28180,15 @@ snapshots:
   typedarray@0.0.6: {}
 
   typedi@0.10.0(patch_hash=sk6omkefrosihg7lmqbzh7vfxe): {}
+
+  typescript-eslint-parser-for-extra-files@0.7.0(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.2))(typescript@5.4.2)(vue@3.4.21(typescript@5.4.2)):
+    dependencies:
+      '@typescript-eslint/parser': 7.10.0(eslint@8.57.0)(typescript@5.4.2)
+      globby: 11.1.0
+      is-glob: 4.0.3
+    optionalDependencies:
+      typescript: 5.4.2
+      vue: 3.4.21(typescript@5.4.2)
 
   typescript@5.4.2: {}
 
