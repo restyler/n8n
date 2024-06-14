@@ -7,16 +7,22 @@
 			:title="$locale.baseText('expressionEdit.editExpression')"
 			:before-close="closeDialog"
 		>
-			<el-row>
-				<el-col :span="8">
-					<div class="header-side-menu">
+			<!-- <el-row class="expression-edit__header">
+				<div class="headline">
+					{{ $locale.baseText('expressionEdit.editExpression') }}
+				</div>
+			</el-row> -->
+
+			<el-row class="expression-edit__content">
+				<el-col class="expression-edit__sidebar">
+					<!-- <div class="header-side-menu">
 						<div class="headline">
 							{{ $locale.baseText('expressionEdit.editExpression') }}
 						</div>
 						<div class="sub-headline">
 							{{ $locale.baseText('expressionEdit.variableSelector') }}
 						</div>
-					</div>
+					</div> -->
 
 					<div class="variable-selector">
 						<VariableSelector
@@ -26,7 +32,8 @@
 						></VariableSelector>
 					</div>
 				</el-col>
-				<el-col :span="16" class="right-side">
+
+				<el-col class="expression-edit__fields">
 					<div class="expression-editor-wrapper">
 						<div class="editor-description">
 							<div>
@@ -41,7 +48,7 @@
 									{{ $locale.baseText('expressionEdit.isJavaScript') }}
 								</span>
 								{{ ' ' }}
-								<n8n-link size="medium" :to="expressionsDocsUrl">
+								<n8n-link size="small" :to="expressionsDocsUrl">
 									{{ $locale.baseText('expressionEdit.learnMore') }}
 								</n8n-link>
 							</div>
@@ -62,7 +69,8 @@
 
 					<div class="expression-result-wrapper">
 						<div class="editor-description">
-							{{ $locale.baseText('expressionEdit.resultOfItem1') }}
+							<div>{{ $locale.baseText('expressionEdit.resultOfItem1') }}</div>
+							<div class="hint">Item 1</div>
 						</div>
 						<div :class="{ 'ph-no-capture': redactValues }">
 							<ExpressionOutput
@@ -298,35 +306,58 @@ export default defineComponent({
 .expression-edit {
 	:deep(.expression-dialog) {
 		.el-dialog__header {
-			padding: 0;
+			padding: var(--spacing-xs) !important;
+			border-bottom: 1px solid var(--color-foreground-base);
 		}
-		.el-dialog__title {
-			display: none;
-		}
+	}
 
-		.el-dialog__body {
-			padding: 0;
-			font-size: var(--font-size-s);
-		}
+	// New stuff (to be reviewed)
+	&__content {
+		display: flex;
+		padding: var(--spacing-s);
+		background-color: var(--color-background-light-base);
+	}
 
-		.right-side {
-			background-color: var(--color-background-light);
-			border-top-right-radius: 8px;
-			border-bottom-right-radius: 8px;
+	&__sidebar {
+		width: 380px; // To be tweaked when schema view is added
+	}
+
+	&__fields {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-xs);
+
+		> div {
+			flex: 1 1 0;
+		}
+	}
+
+	&__toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	// Horizontal alignment
+	&__content {
+		.expression-edit__fields {
+			flex-direction: row;
 		}
 	}
 }
 
 .editor-description {
+	padding: 0 0 var(--spacing-3xs) 0;
 	line-height: 1.5;
-	font-weight: bold;
-	padding: 0 0 0.5em 0.2em;
-	display: flex;
-	justify-content: space-between;
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-s);
 
 	.hint {
 		color: var(--color-text-base);
-		font-weight: normal;
+		font-weight: var(--font-weight-regular);
+		font-size: var(--font-size-2xs);
 		display: flex;
 
 		@media (max-width: $breakpoint-xs) {
@@ -349,15 +380,15 @@ export default defineComponent({
 }
 
 .expression-result-wrapper,
-.expression-editor-wrapper {
-	padding: 10px;
+.expression-editor-wrapper,
+.expression-editor,
+.expression-editor > div {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 0;
 }
 
-.expression-result-wrapper {
-	margin-top: 1em;
-}
-
-.header-side-menu {
+/* .header-side-menu {
 	padding: 1em 0 0.5em var(--spacing-s);
 	border-top-left-radius: 8px;
 
@@ -380,7 +411,7 @@ export default defineComponent({
 		padding-top: 1.5em;
 		color: $color-primary;
 	}
-}
+} */
 
 .variable-selector {
 	margin: 0 var(--spacing-s);
